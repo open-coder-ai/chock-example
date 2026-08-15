@@ -1,0 +1,22 @@
+{
+  "lockfile_version": "1",
+  "engine": ">=0.1,<0.2",
+  "packs": [
+    {
+      "id": "block-no-verify",
+      "version": "0.0.1",
+      "managed": false,
+      "sha256": "1d08a93599746a5d41d7635c64191dd74292ec1c64448477e900d7a7fdbc09d6",
+      "source": "local",
+      "artifacts_sha256": "b0dd28d403cdb4f04685c36ca82c87f1643c686a48239416f877d2ef3d13bfbf"
+    },
+    {
+      "id": "protect-main-branch",
+      "version": "0.0.1",
+      "managed": false,
+      "sha256": "ccfcb46828b7248d1a7a0b8e7ac79998d2f0f9adc617e5b8b31e3aad0f77c9b5",
+      "source": "local",
+      "artifacts_sha256": "b0a06879e411558241c7fb293e36a10405872b93cc9dd5c6856d2382ccf44e88"
+    }
+  ]
+}

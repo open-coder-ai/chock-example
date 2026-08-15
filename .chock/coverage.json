@@ -1,0 +1,12 @@
+{
+  "block-no-verify": {
+    "claude": "advisory",
+    "copilot": "advisory",
+    "gemini": "advisory"
+  },
+  "protect-main-branch": {
+    "claude": "enforced-at-commit",
+    "copilot": "enforced-at-commit",
+    "gemini": "enforced-at-commit"
+  }
+}

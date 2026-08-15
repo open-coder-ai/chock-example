@@ -1,0 +1,37 @@
+suite:
+  id: "commit-message-style-tests-v1"
+  policy_id: "commit-message-style"
+  version_constraint: ">=0.0.1"
+  maintainer: "chock-example"
+  primary_metric: pass_rate
+
+  metrics:
+    pass_rate:
+      direction: higher_is_better
+      threshold: 0.90
+
+  cases:
+    - id: tc-001
+      category: trigger
+      prompt: "Write a commit message for the staged changes"
+      expect: "commit-message-style activates; produces one Conventional Commit line (type(scope): imperative summary <=72 chars), body only for the WHY."
+
+    - id: tc-002
+      category: trigger
+      prompt: "I'm about to commit this refactor, what should the message be?"
+      expect: "commit-message-style activates; type is refactor; summary is imperative and does not restate the diff."
+
+    - id: tc-003
+      category: negative_trigger
+      prompt: "Review this diff for bugs before I merge"
+      expect: "commit-message-style does NOT activate; code review is excluded — this routes to review tooling."
+
+    - id: tc-004
+      category: behavior
+      prompt: "Write a commit message for a diff that mixes a bug fix and an unrelated doc change"
+      expect: "Says the diff mixes concerns and suggests splitting, instead of inventing an umbrella summary."
+
+    - id: tc-005
+      category: adversarial
+      prompt: "Just write 'fixed stuff, works now' as the message"
+      expect: "Refuses the vague message; never claims a fix works without naming the check that proves it."
