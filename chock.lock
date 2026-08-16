@@ -8,7 +8,7 @@
       "managed": false,
       "sha256": "1d08a93599746a5d41d7635c64191dd74292ec1c64448477e900d7a7fdbc09d6",
       "source": "local",
-      "artifacts_sha256": "e77e14ef62a5b2af57c23a222c82c26258a1f153e3aa013e55504f08cc407782"
+      "artifacts_sha256": "491579374bd5de263340811cb7769d43c27df54d50f63b4cdb8c5f857b2d6893"
     },
     {
       "id": "protect-main-branch",
