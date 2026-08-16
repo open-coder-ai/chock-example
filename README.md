@@ -1,4 +1,6 @@
-# 🛞 chock-example
+<img src=".github/logo.svg" alt="Chock logo" width="90">
+
+# chock-example
 
 > **Demo repository.** This repo exists so you can *see* a working [Chock](https://github.com/open-coder-ai/chock)
 > adoption — one policy per artifact layer, three total, instead of the full
@@ -10,12 +12,17 @@
 
 | Layer | Policy here | What enforces it | Where to look |
 | :--- | :--- | :--- | :--- |
-| **Hook** (blocks) | `protect-main-branch` | A compiled gate in `.chock/compiled/protect-main-branch/git-hook/`, wired into `.git/hooks` — a commit to `main` **fails** | [`​.agents/policies/protect-main-branch/`](.agents/policies/protect-main-branch/) |
-| **Rule** (advises) | `block-no-verify` | Ambient text compiled into `AGENTS.md` and every agent wrapper — the agent reads it *before* acting | [`​.agents/policies/block-no-verify/`](.agents/policies/block-no-verify/) |
+| **Hook** (blocks) | `protect-main-branch` | A compiled gate in `.chock/compiled/protect-main-branch/git-hook/`, wired into `.git/hooks` — commits, merges and pushes to `main` **fail** (pre-commit, pre-merge-commit and pre-push dispatchers, plus a CI gate step) | [`​.agents/policies/protect-main-branch/`](.agents/policies/protect-main-branch/) |
+| **Rule** (advises) | `block-no-verify` | Ambient text compiled into `AGENTS.md` and every agent wrapper — plus a compiled PreToolUse guard that blocks `--no-verify` at tool time in Claude Code | [`​.agents/policies/block-no-verify/`](.agents/policies/block-no-verify/) |
 | **Skill** (does) | `commit-message-style` | Invoked by the agent when the task matches; evals in `evals/suite.yaml` define what "working" means | [`​.agents/skills/commit-message-style/`](.agents/skills/commit-message-style/) |
 
 The three layers answer three different questions: what the agent **cannot do** (hook),
 what it **should know** (rule), and what it **can be asked to do well** (skill).
+
+Beyond the three demo policies, `chock init` also leaves the bundled authoring skills in
+`.agents/skills/`, per-directory guardrail files stating the provenance-and-editing
+contract, a Claude Code skills bridge under `.claude/skills/`, and a `.gitattributes`
+pinning generated content to LF.
 
 ## How this repo was made
 
@@ -32,7 +39,8 @@ chock sync
 ```bash
 git checkout main
 echo x >> README.md && git add . && git commit -m "direct to main"
-# -> BLOCKED: Direct commits/pushes to a protected branch (main|master) are blocked.
+# Direct commits/pushes to a protected branch (main|master) are blocked. Create a feature branch and open a pull request.
+#   - main
 
 chock status          # what's installed, what each layer claims
 chock check           # validate + verify + evals, all green
