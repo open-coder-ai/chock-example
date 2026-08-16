@@ -1,11 +1,20 @@
+<div align="center">
+
 <img src=".github/logo.svg" alt="Chock logo" width="90">
 
 # chock-example
 
-> **Demo repository.** This repo exists so you can *see* a working [Chock](https://github.com/open-coder-ai/chock)
-> adoption — one policy per artifact layer, three total, instead of the full
-> [catalog](https://github.com/open-coder-ai/chock-catalog)'s twenty-eight. Questions and
-> issues belong on the [framework repo](https://github.com/open-coder-ai/chock/issues).
+**A working [Chock](https://github.com/open-coder-ai/chock) adoption you can read — one policy per artifact layer.**
+
+[the framework →](https://github.com/open-coder-ai/chock) ·
+[the full catalog →](https://github.com/open-coder-ai/chock-catalog) ·
+[just the bare scaffold →](https://github.com/open-coder-ai/chock-quickstart)
+
+</div>
+
+> **Demo repository.** Three policies instead of the full catalog's twenty-eight, so every
+> moving part fits in one sitting. Questions and issues belong on the
+> [framework repo](https://github.com/open-coder-ai/chock/issues).
 > Click **Use this template** to start your own.
 
 ## One policy per layer
@@ -19,21 +28,6 @@
 The three layers answer three different questions: what the agent **cannot do** (hook),
 what it **should know** (rule), and what it **can be asked to do well** (skill).
 
-Beyond the three demo policies, `chock init` also leaves the bundled authoring skills in
-`.agents/skills/`, per-directory guardrail files stating the provenance-and-editing
-contract, a Claude Code skills bridge under `.claude/skills/`, and a `.gitattributes`
-pinning generated content to LF.
-
-## How this repo was made
-
-```bash
-chock init .                        # wiring (see chock-quickstart for just this)
-chock add protect-main-branch       # hook, from the catalog
-chock add block-no-verify           # rule, from the catalog
-chock new skill commit-message-style  # skill, authored here (SKILL.md + evals)
-chock sync
-```
-
 ## Try the enforcement
 
 ```bash
@@ -45,6 +39,21 @@ echo x >> README.md && git add . && git commit -m "direct to main"
 chock status          # what's installed, what each layer claims
 chock check           # validate + verify + evals, all green
 ```
+
+## How this repo was made
+
+```bash
+chock init .                        # wiring (see chock-quickstart for just this)
+chock add protect-main-branch       # hook, from the catalog
+chock add block-no-verify           # rule, from the catalog
+chock new skill commit-message-style  # skill, authored here (SKILL.md + evals)
+chock sync
+```
+
+Beyond the three demo policies, `chock init` also leaves the bundled authoring skills in
+`.agents/skills/`, per-directory guardrail files stating the provenance-and-editing
+contract, a Claude Code skills bridge under `.claude/skills/`, and a `.gitattributes`
+pinning generated content to LF.
 
 Everything under `.chock/compiled/` is generated — `chock sync` rebuilds it, and
 `chock check` fails if it ever drifts from the policy sources. That claims-match-mechanism
