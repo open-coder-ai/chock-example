@@ -1,0 +1,11 @@
+{
+  "hooks": {
+    "beforeShellExecution": [
+      {
+        "command": "\"C:\\Python314\\python.exe\" \"${CLAUDE_PROJECT_DIR}/.chock/bin/pretooluse.py\" --guard \"${CLAUDE_PROJECT_DIR}/.agents/policies/block-no-verify/implementations/block-no-verify.sh\"",
+        "timeout": 30
+      }
+    ]
+  },
+  "version": 1
+}

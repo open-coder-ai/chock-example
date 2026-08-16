@@ -1,6 +1,6 @@
 {
   "block-no-verify": {
-    "claude": "advisory",
+    "claude": "enforced",
     "copilot": "advisory",
     "gemini": "advisory"
   },
