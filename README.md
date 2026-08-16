@@ -1,4 +1,6 @@
-# 🛞 chock-example
+<img src=".github/logo.svg" alt="Chock logo" width="90">
+
+# chock-example
 
 > **Demo repository.** This repo exists so you can *see* a working [Chock](https://github.com/open-coder-ai/chock)
 > adoption — one policy per artifact layer, three total, instead of the full
