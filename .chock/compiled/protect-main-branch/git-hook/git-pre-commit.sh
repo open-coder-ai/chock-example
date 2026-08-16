@@ -4,8 +4,8 @@ set -eu
 repo_root="$(git rev-parse --show-toplevel)"
 PY=""
 for c in python3 python py; do
-  if command -v "$c" >/dev/null 2>&1 && "$c" -c '' >/dev/null 2>&1; then PY="$c"; break; fi
+  if command -v "$c" >/dev/null 2>&1 && "$c" -c 'import tomllib' >/dev/null 2>&1; then PY="$c"; break; fi
 done
-[ -n "$PY" ] || { echo "gate: no working python interpreter found on PATH" >&2; exit 2; }
+[ -n "$PY" ] || { echo "gate: no python >= 3.11 (with tomllib) found on PATH" >&2; exit 2; }
 exec "$PY" "$repo_root/.chock/bin/gate.py" run \
   --gate "$repo_root/.chock/compiled/protect-main-branch/git-hook/gate.json" --event pre-commit

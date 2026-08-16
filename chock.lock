@@ -8,7 +8,7 @@
       "managed": false,
       "sha256": "1d08a93599746a5d41d7635c64191dd74292ec1c64448477e900d7a7fdbc09d6",
       "source": "local",
-      "artifacts_sha256": "b0dd28d403cdb4f04685c36ca82c87f1643c686a48239416f877d2ef3d13bfbf"
+      "artifacts_sha256": "e77e14ef62a5b2af57c23a222c82c26258a1f153e3aa013e55504f08cc407782"
     },
     {
       "id": "protect-main-branch",
@@ -16,7 +16,7 @@
       "managed": false,
       "sha256": "ccfcb46828b7248d1a7a0b8e7ac79998d2f0f9adc617e5b8b31e3aad0f77c9b5",
       "source": "local",
-      "artifacts_sha256": "b0a06879e411558241c7fb293e36a10405872b93cc9dd5c6856d2382ccf44e88"
+      "artifacts_sha256": "1692297b1c1f19c59e1057d4a1b419927270d513735b88e832ed639bd782995d"
     }
   ]
 }

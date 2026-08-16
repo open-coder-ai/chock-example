@@ -72,9 +72,15 @@ class GateContext:
         # Explicit encoding, never the locale's: `text=True` alone decodes with cp1252 on Windows, so a staged
         # U+2190 arrow (E2 86 90; 0x90 undefined there) crashed the hook and blocked the commit with a traceback
         # instead of a verdict. errors="replace" keeps scanning -- a scanner dying on odd bytes protects nothing.
+        #
+        # core.quotePath=false: with git's default, a path containing any non-ASCII byte is
+        # emitted by --name-only wrapped in quotes with octal escapes ("caf\303\251.txt"). The
+        # follow-up `git show :<that-string>` then fails and this method swallows the error, so
+        # a secret committed in `sécrets.txt` was scanned as zero lines and allowed. Forcing raw
+        # UTF-8 output makes every path round-trip to the show/diff calls unchanged.
         try:
             proc = subprocess.run(
-                ["git", *args],
+                ["git", "-c", "core.quotePath=false", *args],
                 cwd=str(self.repo_root),
                 capture_output=True,
                 text=True,
@@ -86,7 +92,14 @@ class GateContext:
         except (subprocess.CalledProcessError, FileNotFoundError, UnicodeError):
             return ""
 
-    def staged_paths(self, diff_filter: str = "AM") -> list[str]:
+    def rev_exists(self, ref: str) -> bool:
+        """True when `ref` resolves to a commit. Used to fail CI closed on a missing base."""
+        return bool(self._git("rev-parse", "--verify", "--quiet", f"{ref}^{{commit}}").strip())
+
+    # ACMRT, not AM: a rename-with-edit reports as R and a file swapped for a symlink as T,
+    # both of which git's default rename detection hid from an AM filter -- `git mv notes.txt
+    # config.txt` then pasting a secret was never scanned. D (delete) stays out: nothing to scan.
+    def staged_paths(self, diff_filter: str = "ACMRT") -> list[str]:
         out = self._git("diff", *self._range(), "--name-only", f"--diff-filter={diff_filter}")
         return [line.strip() for line in out.splitlines() if line.strip()]
 
@@ -132,7 +145,7 @@ def _kind_content_regex(ctx: GateContext, params: dict, event: str) -> GateResul
     path_re = re.compile(params["forbidden_path_regex"]) if params.get("forbidden_path_regex") else None
     pragma_re = re.compile(params["allowlist_pragma"]) if params.get("allowlist_pragma") else None
     scan = params.get("scan", "added_lines")
-    diff_filter = params.get("diff_filter", "AM")
+    diff_filter = params.get("diff_filter", "ACMRT")
 
     matches: list[str] = []
     for path in ctx.staged_paths(diff_filter):
@@ -267,8 +280,12 @@ def _kind_dependency_allowlist(ctx: GateContext, params: dict, event: str) -> Ga
             if s and not s.startswith("#"):
                 allow.add(s.lower())
 
+    # Match on basename, not full path: `watched` holds bare names ("package.json"), while
+    # staged paths are repo-relative ("web/package.json"). A set intersection only ever hit a
+    # root-level manifest, so every nested manifest in a monorepo was silently unscanned.
     matches: list[str] = []
-    for path in sorted(set(ctx.staged_paths()) & watched):
+    staged = sorted(p for p in ctx.staged_paths() if p.rsplit("/", 1)[-1] in watched)
+    for path in staged:
         # Report only dependencies this commit ADDS. Scanning the staged file alone would
         # block a commit that merely touches a manifest already containing an unlisted
         # package -- a gate that fires on untouched lines gets switched off.
@@ -375,6 +392,18 @@ def run(
         print(f"gate: unknown kind {spec.get('kind')!r}", file=sys.stderr)
         return 2
     ctx = GateContext(repo_root=repo_root, push_stdin=push_stdin, base=base, head_ref=head_ref)
+    # Fail closed, not open, on a base CI cannot resolve. A shallow checkout, an empty
+    # GITHUB_BASE_REF, or a renamed base branch makes `git diff <base>...HEAD` error; every
+    # accessor then swallows the error and returns empty, so the gate would scan nothing and
+    # pass -- the CI backstop reporting green over a diff it never read. Better to break the
+    # build with a diagnosis than to vouch for an unscanned range.
+    if event == "ci" and base and not ctx.rev_exists(base):
+        print(
+            f"gate: base ref {base!r} does not resolve -- refusing to scan an empty range. "
+            "Fetch it (e.g. actions/checkout with fetch-depth: 0) or pass a base that exists.",
+            file=sys.stderr,
+        )
+        return 2
     result = kind(ctx, spec.get("params", {}), name)
     # Logged here, after a kind ran: the early returns above (no gate file, event not
     # covered, unknown kind) are "this gate did not apply", which is not an outcome.
