@@ -1,5 +1,0 @@
-{"ts": "2026-08-16T17:57:22Z", "policy_id": "protect-main-branch", "surface": "git-hook", "event": "commit", "kind": "forbidden_ref", "verdict": "allow", "match_count": 0, "matches": []}
-{"ts": "2026-08-16T17:57:29Z", "policy_id": "protect-main-branch", "surface": "git-hook", "event": "push", "kind": "forbidden_ref", "verdict": "allow", "match_count": 0, "matches": []}
-{"ts": "2026-08-16T18:04:46Z", "policy_id": "protect-main-branch", "surface": "git-hook", "event": "commit", "kind": "forbidden_ref", "verdict": "block", "match_count": 1, "matches": ["main"]}
-{"ts": "2026-08-16T18:07:07Z", "policy_id": "protect-main-branch", "surface": "git-hook", "event": "commit", "kind": "forbidden_ref", "verdict": "allow", "match_count": 0, "matches": []}
-{"ts": "2026-08-16T18:07:14Z", "policy_id": "protect-main-branch", "surface": "git-hook", "event": "push", "kind": "forbidden_ref", "verdict": "allow", "match_count": 0, "matches": []}
