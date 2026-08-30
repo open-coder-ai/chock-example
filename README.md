@@ -1,8 +1,10 @@
 <div align="center">
 
-<img src=".github/logo.svg" alt="Chock logo" width="90">
+<img src=".github/logo.svg" alt="chock-example: a working chock adoption you can read end to end — one policy per artifact layer: git hook, agent rule and skill. The mark is chock's: a wheel held by a chock wedge." width="90">
 
 # chock-example
+
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 
 **A working [Chock](https://github.com/open-coder-ai/chock) adoption you can read — one policy per artifact layer.**
 
