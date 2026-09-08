@@ -62,3 +62,30 @@ pinning generated content to LF.
 Everything under `.chock/compiled/` is generated — `chock sync` rebuilds it, and
 `chock check` fails if it ever drifts from the policy sources. That claims-match-mechanism
 loop is the point of the tool.
+
+## Where to go from here
+
+- **Adopt it in your own repository.** `pip install chock && chock init .`, then `chock add`
+  the policies that match how your team gets hurt; the
+  [catalog](https://github.com/open-coder-ai/chock-catalog) labels each one with what it actually enforces.
+- **Contribute a policy.** The [catalog's contributing guide](https://github.com/open-coder-ai/chock-catalog/blob/main/CONTRIBUTING.md) is short
+  and its rules are mechanical: a policy claims only what it can do, and evals are the
+  argument. The `policy wanted` entries in the [threat ledger](https://github.com/open-coder-ai/chock-threat-intel/blob/main/reference/agentic-threat-ledger.md) are the
+  open work list.
+- **Found something wrong in this exhibit?** This tree is the output of the framework's own commands, so the fix belongs there. Issues go to the
+  [framework repo](https://github.com/open-coder-ai/chock/issues/new/choose).
+
+## Part of the open-coder-ai family
+
+Everything under [open-coder-ai](https://github.com/open-coder-ai) is built on one rule: a claim must match a
+mechanism. Where this repository sits among the others:
+
+| Repository | What it is |
+| :--- | :--- |
+| [chock](https://github.com/open-coder-ai/chock) | The framework: write a policy once, enforce it on git hooks, CI, and every agent |
+| [chock-catalog](https://github.com/open-coder-ai/chock-catalog) | The policies, each graded by what it actually enforces |
+| [agentseam](https://github.com/open-coder-ai/agentseam) | The primitives layer under chock: one handler API over every agent's hooks, with a capability matrix that carries its provenance |
+| [context-report](https://github.com/open-coder-ai/context-report) | A signed report format for whether a plugin, hook, skill or `AGENTS.md` actually works |
+| [chock-threat-intel](https://github.com/open-coder-ai/chock-threat-intel) | A weekly, human-reviewed threat digest scored against the catalog |
+| [chock-claude-plugins](https://github.com/open-coder-ai/chock-claude-plugins) · [copilot](https://github.com/open-coder-ai/chock-copilot-plugins) · [cursor](https://github.com/open-coder-ai/chock-cursor-plugins) · [codex](https://github.com/open-coder-ai/chock-codex-plugins) | The catalog compiled into each client's native plugin format; generated only, rebuilt and diffed in CI |
+| [chock-quickstart](https://github.com/open-coder-ai/chock-quickstart) | The bare scaffold: exactly what `chock init` leaves behind, no policies |
