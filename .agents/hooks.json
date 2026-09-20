@@ -1,0 +1,14 @@
+{
+  "agentseam": {
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"/usr/local/bin/python3\" \".chock/bin/antigravity.py\" --guard \".agents/policies/block-no-verify/implementations/block-no-verify.sh\""
+          }
+        ]
+      }
+    ]
+  }
+}

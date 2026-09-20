@@ -1,12 +1,36 @@
 {
   "block-no-verify": {
-    "claude": "enforced",
-    "copilot": "advisory",
-    "gemini": "advisory"
+    "claude": {
+      "level": "best-effort",
+      "basis": "live-run",
+      "witnessed": false
+    },
+    "copilot": {
+      "level": "best-effort",
+      "basis": "live-run-partial",
+      "witnessed": true
+    },
+    "gemini": {
+      "level": "best-effort",
+      "basis": "vendor-source",
+      "witnessed": false
+    }
   },
   "protect-main-branch": {
-    "claude": "enforced-at-commit",
-    "copilot": "enforced-at-commit",
-    "gemini": "enforced-at-commit"
+    "claude": {
+      "level": "enforced-at-commit",
+      "basis": null,
+      "witnessed": false
+    },
+    "copilot": {
+      "level": "enforced-at-commit",
+      "basis": null,
+      "witnessed": false
+    },
+    "gemini": {
+      "level": "enforced-at-commit",
+      "basis": null,
+      "witnessed": false
+    }
   }
 }
