@@ -1,52 +1,81 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/open-coder-ai/chock/main/docs/assets/readme/cover-chock-example.png" alt="chock-example: a small working adoption of chock, with one policy per layer: a git hook, an agent rule and a skill." width="760">
-
-# Teach your AI agent what not to do.
-
-**Open-source guardrails for AI coding agents: rules the agent reads, checks that run as it writes, and gates at commit and in CI. This template is a working adoption you can read end to end: one policy per layer.**
-
-[the framework →](https://github.com/open-coder-ai/chock) ·
-[the catalog →](https://github.com/open-coder-ai/chock-catalog) ·
-[the bare scaffold →](https://github.com/open-coder-ai/chock-quickstart)
+<p><img src="https://raw.githubusercontent.com/open-coder-ai/chock/main/docs/assets/readme/cover-chock-example.png" alt="chock-example: A working Chock adoption, end to end. One policy per layer, small enough to read in one sitting and ready to copy. Illustrative terminal showing commits refused for an AWS key, an IAM wildcard and an MCP server at @latest." width="100%"></p>
 
 </div>
 
-**What this is.** chock-example is a GitHub template repository: a repo where Chock is already adopted, with three artifacts installed so every moving part fits in one sitting. Chock is open-source application security for code written by AI coding agents. Each check is a deterministic local script, with no model and no upload, and it refuses known vulnerability classes before they are committed.
+<details><summary>Text version</summary>
 
-> **Demo repository.** Questions and issues belong on the [framework repo](https://github.com/open-coder-ai/chock/issues).
+# Teach your AI agent what not to do.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/open-coder-ai/chock/main/docs/assets/demo.gif" alt="Terminal recording of chock refusing unsafe commits and accepting the fixed ones." width="760">
-</p>
+Open-source guardrails for AI coding agents: rules the agent reads, checks that run as it writes, and gates at commit and in CI. This template is a working adoption you can read end to end: one policy per layer.
+
+[chock](https://github.com/open-coder-ai/chock) · [chock-catalog](https://github.com/open-coder-ai/chock-catalog) · [chock-quickstart](https://github.com/open-coder-ai/chock-quickstart) · chock.sh (launching soon)
+
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+
+chock-example is a GitHub template repository: a repo where Chock is already adopted, with three artifacts installed so every moving part fits in one sitting. Chock is open-source application security for code written by AI coding agents. Each check is a deterministic local script, with no model and no upload, and it refuses known vulnerability classes before they are committed. This is a demo repository; questions and issues belong on the [framework repo](https://github.com/open-coder-ai/chock/issues).
+
+</details>
+
+<p><img src="https://raw.githubusercontent.com/open-coder-ai/chock/main/docs/assets/readme/appsec.png" alt="Nine areas Chock checks, application security first, each with the policies that cover it and whether they enforce at commit, in the agent, or only advise." width="100%"></p>
+<details><summary>Text version</summary>
 
 ## Application security for the code your agents write
 
-Coding agents already ask before they run a shell command. What they do not check is the code they write. Chock refuses known classes of insecure code and unsafe actions while the agent writes, at commit and in CI. This repo installs two guardrails and one skill so you can see each layer work. The [catalog](https://github.com/open-coder-ai/chock-catalog) holds the application-security policies you would add next.
+Coding agents already ask before they run a shell command. What they do not check is the code they write: SQL injection in a Spring repository, an IAM grant on `*`, an MCP server at `@latest`, a bidi override hiding in a source file, a secret written into agent memory. Chock checks that code as the agent writes it, at commit and in CI. This repo installs two guardrails and one skill so you can see each layer work. The [catalog](https://github.com/open-coder-ai/chock-catalog) holds the application-security policies you would add next.
+
+| Area | What gets refused | Policy | Tier |
+| :--- | :--- | :--- | :--- |
+| Java & Kotlin | injection, XXE, SSRF, unsafe deserialization, weak crypto, dependencies below a known fix | `java-security` | commit |
+| Unsafe code, IAM | `eval`, `shell=True`, `os.system`, `pickle`; IAM `Action: *` | `block-unsafe-code-execution`, `block-wildcard-iam` | commit |
+| Supply chain | dependencies off an allowlist, Actions on a mutable tag, MCP servers and images at `@latest` | `verify-dependency-exists`, `pin-github-actions`, `block-unpinned-agent-components` | commit |
+| Agent code | host execution, approvals switched off, credential leaks | `agentic-code-security` | commit |
+| Accessibility | a stripped `alt`, `aria-label`, label or `lang` | `no-a11y-regression` | commit |
+| Prompt injection, memory | bidi and tag characters; secrets written into agent memory | `block-invisible-unicode`, `guard-memory-writes` | commit |
+| Test integrity | deleted tests, lost assertions, new skips | `protect-test-integrity` | commit |
+| Also included | secrets, destructive commands, agent self-protection | `scan-secrets`, `block-destructive-commands`, `protect-agent-config` | commit, in-agent |
+
+Tiers: `commit` is a git hook or CI gate that exits non-zero. `in-agent` is the agent's pre-tool hook: best-effort, and it fails open. `advisory` is rule text the agent reads. No agent reaches `enforced` today.
+
+</details>
 
 ## Install
 
-Chock is not on PyPI. Install the frozen engine from its commit (Python 3.11 or newer):
+chock is on PyPI, but the release there (0.15.2, 30 Sep 2026) is older than the engine this page describes. Install the frozen engine from its commit (Python 3.11 or newer):
 
 ```bash
 pip install "chock @ git+https://github.com/open-coder-ai/chock@992711af4cf8d4fd9c4c861f10ef6e53374d75d7"
 ```
 
-Click **Use this template**, clone your copy, then run `chock sync --repo .` once. Git never clones hooks, so every clone does this.
+<p><img src="https://raw.githubusercontent.com/open-coder-ai/chock/main/docs/assets/readme/adopt.png" alt="Two adoption routes: in your repository with chock init, chock add and chock sync, or in your coding agent as plugins." width="100%"></p>
+<details><summary>Text version</summary>
 
-## Two ways to adopt
+### Two ways to adopt it
 
-<img src="https://raw.githubusercontent.com/open-coder-ai/chock/main/docs/assets/readme/adopt.png" alt="The two adoption routes: policies installed in your repository, or Chock plugins installed in your coding agent." width="760">
+1. **In your repository, for teams.** Run `chock init .`, then `chock add <id> --ref <catalog commit> --verify-sha <sha256> --skip-compile` for each policy, then `chock sync --repo . --ci`. Commit the result. Every clone runs `chock sync --repo .` once, because git never clones hooks. The commit gates are enforced at commit and in CI.
+2. **In your coding agent, as plugins.** Best-effort, and they fail open. One repo per client: [Claude Code](https://github.com/open-coder-ai/chock-claude-plugins), [Cursor](https://github.com/open-coder-ai/chock-cursor-plugins), [Copilot](https://github.com/open-coder-ai/chock-copilot-plugins), [Codex](https://github.com/open-coder-ai/chock-codex-plugins), [Devin](https://github.com/open-coder-ai/chock-devin-plugins). Each README has the install line for its client.
+3. **One Claude Code plugin from a selection.** The chock.sh builder (launching soon) gives a `chock install --selection '…' --apply` command.
 
 | | In your repository (for teams) | In your coding agent, as plugins |
 | :--- | :--- | :--- |
-| Steps | `chock init .`, then `chock add <id> --ref <catalog commit> --verify-sha <sha256> --skip-compile` for each policy, then `chock sync --repo . --ci` | Install the plugin for your client from its repo (below) |
 | Where it runs | Your agent's hook where its client has one, at commit, and in CI | The client's pre-tool hook only |
-| Strength | The commit gates are enforced at commit and in CI. Commit the result | Best-effort: the client's hook fails open, and it does not run in CI |
+| Strength | The commit gates are enforced at commit and in CI | Best-effort: the client's hook fails open, and it does not run in CI |
 
-This repo is a result of the repository route. Plugin repos, with per-client install lines in each README: [Claude Code](https://github.com/open-coder-ai/chock-claude-plugins), [Copilot](https://github.com/open-coder-ai/chock-copilot-plugins), [Cursor](https://github.com/open-coder-ai/chock-cursor-plugins), [Codex](https://github.com/open-coder-ai/chock-codex-plugins), [Devin](https://github.com/open-coder-ai/chock-devin-plugins). A third route, one Claude Code plugin from a selection of policies, comes from the chock.sh builder (launching soon).
+This repo is a result of the repository route.
 
-## How it works: one policy per layer
+### Use this template
+
+Click **Use this template**, clone your copy, then run `chock sync --repo .` once. Git never clones hooks, so every clone does this.
+
+</details>
+
+<p><img src="https://raw.githubusercontent.com/open-coder-ai/chock/main/docs/assets/readme/quickstart.png" alt="Two commands set up the hooks, then the next commit containing a credential is refused and the rewritten file passes." width="100%"></p>
+<details><summary>Text version</summary>
+
+## How it works
+
+### One policy per layer
 
 | Layer | Policy | Tier in the catalog | Mechanism here |
 | :--- | :--- | :--- | :--- |
@@ -54,7 +83,13 @@ This repo is a result of the repository route. Plugin repos, with per-client ins
 | Rule | `block-no-verify` | Best-effort (in the agent, fails open) | Ambient text in `AGENTS.md` and every agent wrapper, plus a compiled pre-tool guard that refuses `--no-verify` and `-n` where the client has a hook: wired here for Claude Code, Gemini CLI and VS Code Copilot |
 | Skill | `commit-message-style` | Invoked, not gated | Runs when the agent's task matches; its `evals/suite.yaml` defines what "working" means |
 
-Tiers are from the catalog's `registry.yaml` at commit `9a64623`. The two policies here are local copies (`chock.lock` records `source: local`) and may be older than the catalog's versions. No agent reaches "enforced" today.
+Tiers are from the catalog's `registry.yaml` at commit `f25f5a3` (policies unchanged since `9a64623`). The two policies here are local copies (`chock.lock` records `source: local`) and may be older than the catalog's versions. No agent reaches "enforced" today.
+
+The cover and the panel above are illustrations. The refusals they show (an AWS key, an IAM wildcard, an MCP server at `@latest`, a key in `config.py`) come from catalog policies such as `scan-secrets`, `block-wildcard-iam` and `block-unpinned-agent-components`; this repo installs the policies in the table. The recording below shows chock refusing unsafe commits and accepting the fixed ones.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/open-coder-ai/chock/main/docs/assets/demo.gif" alt="Terminal recording of chock refusing unsafe commits and accepting the fixed ones." width="760">
+</p>
 
 **Hook.** Try it: `git checkout main && echo x >> README.md && git add . && git commit -m "direct to main"` fails with `Direct commits/pushes to a protected branch (main|master) are blocked. Create a feature branch and open a pull request.` The commit never lands.
 
@@ -66,17 +101,28 @@ A check costs no tokens: each is a script, not a model. A passing check adds not
 
 ## What it stops
 
-Only what is installed here: direct commits and pushes to `main`, and `--no-verify` at the agent's tool call. To grow from here, `chock add` the catalog policies that match how your team gets hurt, such as `scan-secrets` and `block-destructive-commands` (both enforced at commit) or `java-security`. The catalog has 71 policies: 35 enforced at commit, 11 in the agent, 25 advisory. Area table: [chock-catalog](https://github.com/open-coder-ai/chock-catalog#the-policies).
+Only what is installed here: direct commits and pushes to `main`, and `--no-verify` at the agent's tool call. To grow from here, `chock add` the catalog policies that match how your team gets hurt, such as `scan-secrets` and `block-destructive-commands` (both enforced at commit) or `java-security`. The catalog has 71 policies: 35 enforced at commit, 11 in the agent, 25 advisory (`registry.yaml` at `f25f5a3`). Area table: [chock-catalog](https://github.com/open-coder-ai/chock-catalog#the-policies).
+
+</details>
+
+<p><img src="https://raw.githubusercontent.com/open-coder-ai/chock/main/docs/assets/readme/honest.png" alt="Guardrails, not guarantees: the three tiers, no matrix cell graded enforced, and no OWASP Agentic risk fully covered." width="100%"></p>
+<details><summary>Text version</summary>
+
+## Guardrails, not guarantees
+
+Tiers: `commit` is a git hook or CI gate that exits non-zero. `in-agent` is the agent's pre-tool hook: best-effort, and it fails open. `advisory` is rule text the agent reads. No agent reaches `enforced` today. OWASP mappings are partial and the engine is frozen at the commit above. Chock does not stop every attack: it closes common, known entry points before they ship.
+
+</details>
 
 ## FAQ for people and agents
 
-**Does Chock use an LLM?** No. Each check is a deterministic script. A check costs no tokens; a refusal adds one short reason.
+**Does Chock use an LLM?** No. Each check is a deterministic script. A check costs no tokens; a refusal adds one short reason to the agent's context.
 
 **Does my code leave my machine?** Chock adds no new place your code goes. The agent still sends context to its own model provider. `chock add` fetches policies from the catalog once.
 
 **Which agents does it work with?** Any agent that reads `AGENTS.md`, plus native hooks where the client has them. Plugins cover Claude Code, Copilot, Cursor, Codex and Devin.
 
-**How do I install it?** The repository route or the plugin route above.
+**How do I install it?** The repository route or the plugin route, both in [Install](#install).
 
 **What does it cost?** Free and open source (Apache-2.0).
 
@@ -86,6 +132,7 @@ Only what is installed here: direct commits and pushes to `main`, and `--no-veri
 
 ## For tools and agents
 
+Machine-readable sources:
 - [`registry.yaml`](https://github.com/open-coder-ai/chock-catalog/blob/main/registry.yaml): every policy, its tier and eval counts
 - Policy manifests, with `compliance` mappings: [`base/*/manifest.yaml`](https://github.com/open-coder-ai/chock-catalog/tree/main/base)
 - [`docs/coverage.md`](https://github.com/open-coder-ai/chock-catalog/blob/main/docs/coverage.md): OWASP coverage
@@ -93,20 +140,33 @@ Only what is installed here: direct commits and pushes to `main`, and `--no-veri
 - This repo's own index: [`.agents/policies/INDEX.md`](.agents/policies/INDEX.md)
 - chock.sh `/llms.txt` and `/api/index.json`: launching soon
 
-## Contribute
-
-Issues about the scaffold go to the [framework repo](https://github.com/open-coder-ai/chock/issues/new/choose). Policies go to the [catalog](https://github.com/open-coder-ai/chock-catalog/blob/main/CONTRIBUTING.md). Sign commits with `git commit -s`.
+<p><img src="https://raw.githubusercontent.com/open-coder-ai/chock/main/docs/assets/readme/family.png" alt="The 13 public repositories of open-coder-ai: core, policies, evidence, plugins, templates and community files." width="100%"></p>
+<details><summary>Text version</summary>
 
 ## Part of open-coder-ai
 
+The 13 public repositories:
+
 | Repository | What it is |
 | :--- | :--- |
-| [chock](https://github.com/open-coder-ai/chock) | The framework: write a policy once, enforce it on git hooks, CI and every agent |
-| [chock-catalog](https://github.com/open-coder-ai/chock-catalog) | The policies, each graded by what it actually enforces |
-| [agentseam](https://github.com/open-coder-ai/agentseam) | One handler API over every coding agent's hooks, instruction files and plugin packaging |
-| [context-report](https://github.com/open-coder-ai/context-report) | A signed report format for whether a plugin, hook, skill or `AGENTS.md` works |
-| [chock-threat-intel](https://github.com/open-coder-ai/chock-threat-intel) | A weekly, human-reviewed threat ledger scored against the catalog |
-| [chock-claude-plugins](https://github.com/open-coder-ai/chock-claude-plugins) · [copilot](https://github.com/open-coder-ai/chock-copilot-plugins) · [cursor](https://github.com/open-coder-ai/chock-cursor-plugins) · [codex](https://github.com/open-coder-ai/chock-codex-plugins) · [devin](https://github.com/open-coder-ai/chock-devin-plugins) | The catalog compiled into each client's plugin format |
-| [chock-quickstart](https://github.com/open-coder-ai/chock-quickstart) | The bare scaffold `chock init` leaves behind |
+| [agentseam](https://github.com/open-coder-ai/agentseam) | Core: One handler API over every coding agent. |
+| [chock](https://github.com/open-coder-ai/chock) | Core: Author a policy once, enforce it on every agent. |
+| [chock-catalog](https://github.com/open-coder-ai/chock-catalog) | Policies: The policies, each labelled by what it enforces, with replayed evals. |
+| [context-report](https://github.com/open-coder-ai/context-report) | Evidence: A signed report of whether an agent artifact works. |
+| [chock-threat-intel](https://github.com/open-coder-ai/chock-threat-intel) | Evidence: A weekly threat ledger, each entry scored against the catalog. |
+| [chock-claude-plugins](https://github.com/open-coder-ai/chock-claude-plugins) | Plugins: The catalog as Claude Code plugins (generated). |
+| [chock-copilot-plugins](https://github.com/open-coder-ai/chock-copilot-plugins) | Plugins: The catalog as Copilot CLI and VS Code plugins (generated). |
+| [chock-cursor-plugins](https://github.com/open-coder-ai/chock-cursor-plugins) | Plugins: The catalog as Cursor plugins (generated). |
+| [chock-codex-plugins](https://github.com/open-coder-ai/chock-codex-plugins) | Plugins: The catalog as Codex plugins (generated). |
+| [chock-devin-plugins](https://github.com/open-coder-ai/chock-devin-plugins) | Plugins: The catalog as Devin plugins (generated). |
+| [chock-quickstart](https://github.com/open-coder-ai/chock-quickstart) | Template: What chock init leaves behind. |
+| [chock-example](https://github.com/open-coder-ai/chock-example) | Template: A working adoption, one policy per layer. |
+| [.github](https://github.com/open-coder-ai/.github) | Community: Org profile and community health files. |
+
+## Contributing
+
+Issues about the scaffold go to the [framework repo](https://github.com/open-coder-ai/chock/issues/new/choose). Policies go to the [catalog](https://github.com/open-coder-ai/chock-catalog/blob/main/CONTRIBUTING.md). Sign commits with `git commit -s`.
 
 Apache-2.0, see [LICENSE](LICENSE).
+
+</details>
