@@ -80,7 +80,7 @@ Only what is installed here: direct commits and pushes to `main`, and `--no-veri
 
 **What does it cost?** Free and open source (Apache-2.0).
 
-**Does it replace SAST or code review?** No. It removes the findings those stages keep repeating, and does not stop every attack.
+**Does it replace SAST or code review?** No. It refuses known classes while the agent writes, so they are fixed before review; keep SAST and review.
 
 **Which OWASP items does it cover?** Every OWASP Agentic (ASI01–ASI10) risk has at least one catalog policy mapped to it, and every mapping is partial: [`docs/coverage.md`](https://github.com/open-coder-ai/chock-catalog/blob/main/docs/coverage.md). The two policies in this repo are not application-security gates.
 
