@@ -1,0 +1,19 @@
+# chock-example
+
+> A kill switch for your coding agent's wrong moves.
+
+A GitHub template repository where Chock is already adopted: one policy per layer (hook, rule, skill).
+
+## README
+
+- [Application security for the code your agents write](README.md#application-security-for-the-code-your-agents-write): what gets refused, by area and tier
+- [Install](README.md#install): the repository route and the plugin route
+- [How it works](README.md#how-it-works): one policy per layer, and how to try each
+- [What it stops](README.md#what-it-stops): what is installed here, and what to add next
+- [Guardrails, not guarantees](README.md#guardrails-not-guarantees): tiers and limits
+- [FAQ for people and agents](README.md#faq-for-people-and-agents): LLM use, data, agents, install, cost, SAST, OWASP
+- [For tools and agents](README.md#for-tools-and-agents): machine-readable sources
+
+## Docs
+
+- [chock.sh/docs](https://chock.sh/docs): the Chock documentation
