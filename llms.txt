@@ -1,6 +1,6 @@
 # chock-example
 
-> A kill switch for your coding agent's wrong moves.
+> Blocks your coding agent's wrong moves before they land.
 
 A GitHub template repository where Chock is already adopted: one policy per layer (hook, rule, skill).
 
