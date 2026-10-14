@@ -6,7 +6,7 @@
 
 # Teach your AI agent what not to do.
 
-A kill switch for your coding agent's wrong moves. This template is a working adoption you can read end to end: one policy per layer.
+Blocks your coding agent's wrong moves before they land. This template is a working adoption you can read end to end: one policy per layer.
 
 [chock](https://github.com/open-coder-ai/chock) · [chock-catalog](https://github.com/open-coder-ai/chock-catalog) · [chock-quickstart](https://github.com/open-coder-ai/chock-quickstart) · chock.sh (launching soon)
 
