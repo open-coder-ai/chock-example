@@ -6,15 +6,15 @@
       "id": "block-no-verify",
       "version": "0.0.1",
       "managed": false,
-      "sha256": "fa557dc2d82ad4c54691a23e238e5928590dcb054571b482e66f5937e789d76c",
+      "sha256": "f68c0d080031d7b59e73965ecfe47692784410ecfd4f351be49f5c666e3c9892",
       "source": "local",
-      "artifacts_sha256": "fc65a16e8d3d84f2735a86922e16fa21324fcb63553c17cdd32bb87ef5a6d906"
+      "artifacts_sha256": "3ca40596ae0bb83532989943a60cf2d26e51ae587193cf87e37a617a49eb518c"
     },
     {
       "id": "protect-main-branch",
       "version": "0.0.1",
       "managed": false,
-      "sha256": "316bd80a2fdbeb098f8477503af8c9e0977cf11be4e32572d87014ef062e055d",
+      "sha256": "a0c154b0e2fc31a90f518419d29177a487702f881e7f0158e566271d5a8a61a8",
       "source": "local",
       "artifacts_sha256": "18bb4772936ece0e374fb48e1a09fdbf946fb82381ed30687c0bcc8a10d4643c"
     }

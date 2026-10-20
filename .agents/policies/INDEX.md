@@ -8,7 +8,7 @@
   never(commit|push): --no-verify|-n
   if(hook_fails): fix_issue; never(skip_hook)
 
-## Gates — enforced automatically at commit/push
+## Gates — enforced automatically at commit/push, and in the agent where noted
 
 - **protect-main-branch**: Direct commits/pushes to a protected branch (main|master) are blocked. Create a feature branch and open a pull request.
 
