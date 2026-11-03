@@ -1,22 +1,22 @@
 {
-  "lockfile_version": "1",
+  "lockfile_version": "2",
   "engine": ">=0.1,<0.2",
   "packs": [
     {
       "id": "block-no-verify",
       "version": "0.0.1",
       "managed": false,
-      "sha256": "f68c0d080031d7b59e73965ecfe47692784410ecfd4f351be49f5c666e3c9892",
+      "sha256": "f8574c579d452edf4a75c28b18c0c3fb6f7fa55f7fe43bcfdd083d7e5792bc63",
       "source": "local",
-      "artifacts_sha256": "3ca40596ae0bb83532989943a60cf2d26e51ae587193cf87e37a617a49eb518c"
+      "artifacts_sha256": "332b8aa53945e2561c8800da323677866f7f1b99925915a81e9249af331517ba"
     },
     {
       "id": "protect-main-branch",
       "version": "0.0.1",
       "managed": false,
-      "sha256": "a0c154b0e2fc31a90f518419d29177a487702f881e7f0158e566271d5a8a61a8",
+      "sha256": "d1709293d7ee4ef502457e2e65eb65516daebd6ba5f7172db744bfdd8db63002",
       "source": "local",
-      "artifacts_sha256": "18bb4772936ece0e374fb48e1a09fdbf946fb82381ed30687c0bcc8a10d4643c"
+      "artifacts_sha256": "dd31407d52e400f6f74e515cdacb8b3e188b97133db255f88bf73791bbee2eb4"
     }
   ]
 }
