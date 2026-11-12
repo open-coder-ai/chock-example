@@ -1,19 +1,19 @@
 ---
 name: block-no-verify
-description: "Best-effort guard against bypassing git hooks via git commit/push --no-verify or -n. Known bypass classes include aliases, wrapper scripts, and non-standard clients. Fix the underlying hook failure instead of skipping validation."
+description: "Friction, not a security boundary: refuses agent commands that skip git hooks. --no-verify on commit/push/merge/am/rebase/pull/cherry-pick/revert, -n on commit/am; core.hooksPath set by -c, git config or GIT_CONFIG_*; HUSKY=0, SKIP=, LEFTHOOK=0 and kin; hook manager uninstall; aliases and rebase --exec defined in the command. Asks on plumbing, unset hooksPath, another GIT_DIR and config files. Refuses person-only CHOCK_*/marker changes. Mandatory. Misses: older aliases, scripts, $VARs."
 metadata:
   chock.artifact: rule
   chock.enforcement: advise
   chock.coverage_without_chock: advisory
 ---
 
-# Block No-Verify
+# Block Skipping Git Hooks
 
-Best-effort guard against bypassing git hooks via git commit/push --no-verify or -n. Known bypass classes include aliases, wrapper scripts, and non-standard clients. Fix the underlying hook failure instead of skipping validation.
+Friction, not a security boundary: refuses agent commands that skip git hooks. --no-verify on commit/push/merge/am/rebase/pull/cherry-pick/revert, -n on commit/am; core.hooksPath set by -c, git config or GIT_CONFIG_*; HUSKY=0, SKIP=, LEFTHOOK=0 and kin; hook manager uninstall; aliases and rebase --exec defined in the command. Asks on plumbing, unset hooksPath, another GIT_DIR and config files. Refuses person-only CHOCK_*/marker changes. Mandatory. Misses: older aliases, scripts, $VARs.
 
 ```
-never(commit|push): --no-verify|-n
-if(hook_fails): fix_issue; never(skip_hook)
+never(commit|push|merge|am|rebase|pull|cherry-pick|revert): --no-verify|-n(commit|am); never(set): core.hooksPath|HUSKY=0|SKIP=|LEFTHOOK=0|kin; never: pre-commit|lefthook|husky uninstall; ask: commit-tree|update-ref|GIT_DIR|config files
+never(agent_set|unset): CHOCK_ALLOW*|CHOCK_AGENT_COMMIT|CHOCK_DIFF_LIMIT|CLAUDECODE|AI_AGENT; if(hook_fails|override_needed): fix_issue|ask_person
 ```
 
 This skill is advisory: the client reading it has no mechanism to enforce it. The same policy compiled by `chock` can refuse an agent's shell command before it runs. See https://github.com/open-coder-ai/chock

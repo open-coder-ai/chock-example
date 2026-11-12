@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "git -c \"alias.chock-hook=!test -f .chock/bin/launch.sh || { echo chock: no .chock/bin/launch.sh here, run chock sync --repo . >&2; exit 2; }; sh .chock/bin/launch.sh\" chock-hook .chock/bin/gemini_cli.py --multi \".chock/bin/index/gemini_cli-BeforeTool-09cc5246.json\" --index-sha256 5d8527ea85d2b2bc1206249dc29eacca8577333e9205f3633d19c41749fa154d",
+            "command": "git -c \"alias.chock-hook=!test -f .chock/bin/launch.sh || { echo chock: no .chock/bin/launch.sh here, run chock sync --repo . >&2; exit 2; }; sh .chock/bin/launch.sh\" chock-hook .chock/bin/gemini_cli.py --multi \".chock/bin/index/gemini_cli-BeforeTool-09cc5246.json\" --index-sha256 5e4f08a2abced8cdcd34abe75d145b0259b690f96cab79f0e6d5e41fd9c3695b",
             "timeout": 45000
           }
         ],
