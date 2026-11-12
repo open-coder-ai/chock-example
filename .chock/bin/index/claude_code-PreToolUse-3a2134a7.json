@@ -1,0 +1,34 @@
+{
+  "members": [
+    {
+      "argv": [
+        "--guard",
+        ".agents/policies/block-no-verify/implementations/block-no-verify.sh"
+      ],
+      "files": {
+        ".agents/policies/block-no-verify/evals/suite.yaml": "cc02bcd319edfe45d81926f3d2187582468cf33e66e212d4083dfc3b88be23b5",
+        ".agents/policies/block-no-verify/implementations/block-no-verify.sh": "00d80db2f3ab3153a2f4c9bbea8031676594336b5ab0cabdf75950ee13e1353b",
+        ".agents/policies/block-no-verify/manifest.yaml": "7fb100ea4016891d9a8803c5f5d0cb6f61f083abb9bf82ec9d2366dd0021eb2e",
+        ".agents/policies/block-no-verify/plugin.json": "49f90cad44e3848b0d19d161787005d48a27f16cd0a2f75bf21e39fcf052b518",
+        ".agents/policies/block-no-verify/skills/block-no-verify/SKILL.md": "fca14678113afdab8486f6178a6f65c463e38c7201408d3f4ec384950ba17d02",
+        ".chock/compiled/block-no-verify/agent-hooks/agent-hooks.json": "627069e931fc5a7aa80d48d19938cd0c79ebccf08bc9561c544d2e9b5e054ebd",
+        ".chock/compiled/block-no-verify/ambient-rule/ambient.md": "146f3c2f97acb0b4def2ef4cb1ff0c7289bc7ff73a2d45e54c1719f02d307428",
+        ".chock/compiled/block-no-verify/managed-setting/managed-settings.json": "859d05e0265611518ac5329c0a52141581f55956fd86e952206d6651820f018b",
+        ".chock/compiled/block-no-verify/pre-tool-use/antigravity-hooks.json": "b9e1fcb6ce38ad1a42dfdeb2f535261e9d633b510d783a032ee4b306e6b3eced",
+        ".chock/compiled/block-no-verify/pre-tool-use/codex_cli-hooks.json": "0b72a06582e66a3c3640273aacca321d170a96926cc5f143b39b6524d17871f9",
+        ".chock/compiled/block-no-verify/pre-tool-use/cursor-hooks.json": "1ef85576116deb26563531df69c10d2e146b3bb48d30540040a922ff50a83fe3",
+        ".chock/compiled/block-no-verify/pre-tool-use/devin-hooks.json": "e78970958f7bce2b349129a90a8c6d3ec175c9ac1497ef733e7186f553409387",
+        ".chock/compiled/block-no-verify/pre-tool-use/factory_droid-hooks.json": "2b44d6dbef3240b74763c27cb7edbcc6d54fcc06b2512d34935db325b03d18a1",
+        ".chock/compiled/block-no-verify/pre-tool-use/gemini_cli-hooks.json": "2cb6ed681e246e952e2659e1417884747bc371f89f5882b04ce0b84ac7ff06f8",
+        ".chock/compiled/block-no-verify/pre-tool-use/goose-hooks.json": "7277d63fceb849cd648abbd11e9b01b8399b277a29a06bedf27d19070b103e0f",
+        ".chock/compiled/block-no-verify/pre-tool-use/grok-hooks.json": "44eb57add46ea4a993ab13bf6fd71699a72cd2ca176863303cc6f5cfe3837b96",
+        ".chock/compiled/block-no-verify/pre-tool-use/mistral_vibe-hooks.json": "2a3e7a2510ae78720939c3a28e015dd303de59e5ba904b5ebb1fa721f025a7bd",
+        ".chock/compiled/block-no-verify/pre-tool-use/openhands-hooks.json": "f043e4baf2d0bc1880be4ea7fb6b83575a639a7910496db7186142f74a7794c2",
+        ".chock/compiled/block-no-verify/pre-tool-use/pretooluse.json": "b4068dd447a0c77a6504c88b4c3673b03fa73eb481ecab755d01b4cbd79972e7",
+        ".chock/compiled/block-no-verify/pre-tool-use/tabnine-hooks.json": "202fb62e8a0a8470cabbf9c2b004b1624e5550e2213d25c726f49d181612c3e7",
+        ".chock/compiled/block-no-verify/pre-tool-use/windsurf-hooks.json": "32757c05ee868882edaa152444b4c619701f02e3654373445d309c378f5bae72"
+      },
+      "timeout": 30
+    }
+  ]
+}
