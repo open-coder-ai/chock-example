@@ -6,16 +6,20 @@
       "id": "block-no-verify",
       "version": "0.0.1",
       "managed": false,
-      "sha256": "f8574c579d452edf4a75c28b18c0c3fb6f7fa55f7fe43bcfdd083d7e5792bc63",
-      "source": "local",
-      "artifacts_sha256": "332b8aa53945e2561c8800da323677866f7f1b99925915a81e9249af331517ba"
+      "sha256": "05a68fb4397d69e1eeae47c5088706b47d839d8d7a96b300852f31e0685a3049",
+      "source": "https://github.com/open-coder-ai/chock-catalog",
+      "source_commit": "38fb487f7768f3d5c06853a0d4a346587abec937",
+      "source_ref": "38fb487f7768f3d5c06853a0d4a346587abec937",
+      "artifacts_sha256": "5f5274b6f68caac4ea4c85cfd8737e5e37abd3b4657ceaf347a7a1d3f6756655"
     },
     {
       "id": "protect-main-branch",
       "version": "0.0.1",
       "managed": false,
-      "sha256": "d1709293d7ee4ef502457e2e65eb65516daebd6ba5f7172db744bfdd8db63002",
-      "source": "local",
+      "sha256": "0a5d5865b6258b60dea44d05e38bcd58506ac50c13123d35e88a69a598e9aacd",
+      "source": "https://github.com/open-coder-ai/chock-catalog",
+      "source_commit": "38fb487f7768f3d5c06853a0d4a346587abec937",
+      "source_ref": "38fb487f7768f3d5c06853a0d4a346587abec937",
       "artifacts_sha256": "dd31407d52e400f6f74e515cdacb8b3e188b97133db255f88bf73791bbee2eb4"
     }
   ]

@@ -5,13 +5,13 @@
       {
         "id": "block-no-verify",
         "artifact": "rule",
-        "version": "0.0.1",
-        "name": "Block No-Verify",
-        "description": "Best-effort guard against bypassing git hooks via git commit/push --no-verify or -n. Known bypass classes include aliases, wrapper scripts, and non-standard clients. Fix the underlying hook failure instead of skipping validation.",
+        "version": "0.5.5",
+        "name": "Block Skipping Git Hooks",
+        "description": "Friction, not a security boundary: refuses agent commands that skip git hooks. --no-verify on commit/push/merge/am/rebase/pull/cherry-pick/revert, -n on commit/am; core.hooksPath set by -c, git config or GIT_CONFIG_*; HUSKY=0, SKIP=, LEFTHOOK=0 and kin; hook manager uninstall; aliases and rebase --exec defined in the command. Asks on plumbing, unset hooksPath, another GIT_DIR and config files. Refuses person-only CHOCK_*/marker changes. Mandatory. Misses: older aliases, scripts, $VARs.",
         "path": ".agents/policies/block-no-verify",
         "manifest": "manifest.yaml",
         "trust_tier": "community",
-        "lifecycle_status": "draft",
+        "lifecycle_status": "production",
         "dependencies": [],
         "script_hashes": {}
       }
@@ -80,13 +80,13 @@
       {
         "id": "protect-main-branch",
         "artifact": "hook",
-        "version": "0.0.1",
+        "version": "0.0.5",
         "name": "Protect Main Branch",
-        "description": "Block direct commits and pushes to main or master. Enforced at commit time by reading the current branch, and at push time by parsing the refs the agent is pushing.",
+        "description": "Keeps agents off main and master: a git hook reads the current branch at commit time and parses the refs being pushed at push time. The hook refuses a violation only where it is installed. As skill text alone this is advice, and nothing stops one.",
         "path": ".agents/policies/protect-main-branch",
         "manifest": "manifest.yaml",
         "trust_tier": "community",
-        "lifecycle_status": "draft",
+        "lifecycle_status": "production",
         "dependencies": [],
         "script_hashes": {}
       }
