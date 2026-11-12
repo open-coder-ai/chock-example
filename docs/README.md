@@ -49,7 +49,7 @@ loop is the point of the tool.
 
 ## Where to go from here
 
-- **Adopt it in your own repository.** `pip install chock==1.0.0 && chock init .`, then `chock add`
+- **Adopt it in your own repository.** `pip install chock==1.1.0 && chock init .`, then `chock add`
   the policies that match how your team gets hurt; the
   [catalog](https://github.com/open-coder-ai/chock-catalog) labels each one with what it actually enforces.
 - **Contribute a policy.** The [catalog's contributing guide](https://github.com/open-coder-ai/chock-catalog/blob/main/CONTRIBUTING.md) is short
