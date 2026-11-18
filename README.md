@@ -33,10 +33,10 @@ Tiers: `commit` is a git hook or CI gate that exits non-zero. `in-agent` is the 
 
 ## Install
 
-chock 1.1.0 is on PyPI (`pip install chock==1.1.0`), and its tag `v1.1.0` is the engine commit this page describes. To install that exact commit instead (Python 3.11 or newer):
+chock 1.2.0 is on PyPI (`pip install chock==1.2.0`), and its tag `v1.2.0` is the engine commit this page describes. To install that exact commit instead (Python 3.11 or newer):
 
 ```bash
-pip install "chock @ git+https://github.com/open-coder-ai/chock@2f3be6d04349a7ec433657e16a294efc62b51d4f"
+pip install "chock @ git+https://github.com/open-coder-ai/chock@5088f2f17df0c10b3269a68685a3500ffea6516a"
 ```
 
 ### Two ways to adopt it
