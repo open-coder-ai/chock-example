@@ -24,7 +24,6 @@
         ".agents/policies/block-no-verify/skills/block-no-verify/SKILL.md": "b1b3e48a0878a89c9304017f01f26052d610fc53eb61e2040a378c05a7755ca1",
         ".chock/compiled/block-no-verify/agent-hooks/agent-hooks.json": "82b2e539bb812058a0c6cf3298ae9b72762eec28ede995ebe730b5d76f99c02b",
         ".chock/compiled/block-no-verify/ambient-rule/ambient.md": "a2d15b897ef785c79912642dc81727cbe8a4a6afae1acf17ecbd3783cda8b650",
-        ".chock/compiled/block-no-verify/managed-setting/managed-settings.json": "859d05e0265611518ac5329c0a52141581f55956fd86e952206d6651820f018b",
         ".chock/compiled/block-no-verify/pre-tool-use/antigravity-hooks.json": "1d5445dda7ade581edf55dc5e2d9adfde0c2ec9efd9cede936b8b99fd1fb0a9b",
         ".chock/compiled/block-no-verify/pre-tool-use/codex_cli-hooks.json": "a9df710f0b597cf83be795e5f7e68e0b9a641199765f4c7870de0be60b9ce8f0",
         ".chock/compiled/block-no-verify/pre-tool-use/cursor-hooks.json": "b7d84e25198f56302446e5a3738bfc1328a1e144c69d4d5b8cacdc83b9c829fa",
