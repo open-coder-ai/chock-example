@@ -1,6 +1,6 @@
 {
   "lockfile_version": "2",
-  "engine": ">=0.1,<0.2",
+  "engine": ">=1.2,<2",
   "packs": [
     {
       "id": "block-no-verify",
@@ -10,7 +10,7 @@
       "source": "https://github.com/open-coder-ai/chock-catalog",
       "source_commit": "38fb487f7768f3d5c06853a0d4a346587abec937",
       "source_ref": "38fb487f7768f3d5c06853a0d4a346587abec937",
-      "artifacts_sha256": "5f5274b6f68caac4ea4c85cfd8737e5e37abd3b4657ceaf347a7a1d3f6756655"
+      "artifacts_sha256": "054b377f446354b22d7f2b5fb8e45182ae9e760e3712e2e3e36307a0bb00c9aa"
     },
     {
       "id": "protect-main-branch",
@@ -20,7 +20,7 @@
       "source": "https://github.com/open-coder-ai/chock-catalog",
       "source_commit": "38fb487f7768f3d5c06853a0d4a346587abec937",
       "source_ref": "38fb487f7768f3d5c06853a0d4a346587abec937",
-      "artifacts_sha256": "dd31407d52e400f6f74e515cdacb8b3e188b97133db255f88bf73791bbee2eb4"
+      "artifacts_sha256": "a7d7c8dc2439782632437eee5c407ec95fa5a8b5ac78385a699183d3510c58e2"
     }
   ]
 }
